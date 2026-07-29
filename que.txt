@@ -1,0 +1,130 @@
+1. Data Engineering Pipelines
+Walk me through a data pipeline you built end-to-end. What tools did you use?
+How do you handle failures or partial failures in a data pipeline?
+What's the difference between batch and streaming data processing?
+How do you ensure data quality and validation within a pipeline?
+What is ELT vs ETL? When would you prefer one over the other?
+How do you optimize a slow-running data pipeline?
+Have you worked with Spark or Kafka? Describe a use case.
+How do you schedule and monitor pipeline jobs in production?
+How would you design a pipeline specifically to feed data into an ML model?
+How do you handle schema changes in an upstream data source without breaking your pipeline?
+What is data lineage and why does it matter in a pipeline?
+How do you test a data pipeline before deploying to production?
+2. Machine Learning Fundamentals
+Explain the difference between supervised, unsupervised, and reinforcement learning with examples.
+What is overfitting and underfitting? How do you detect and fix each?
+Walk me through building an ML model from scratch for a business problem.
+What evaluation metrics would you use for classification vs regression problems?
+What is the difference between bagging and boosting? Give examples of algorithms for each.
+How do you handle missing data before training a model?
+How do you handle imbalanced datasets?
+What is the bias-variance tradeoff?
+What is cross-validation and why is it important?
+How does a decision tree differ from a random forest?
+What is regularization? Explain L1 vs L2.
+When would you use clustering over classification?
+3. ML Frameworks (TensorFlow / PyTorch / Scikit-learn)
+Which ML framework have you used most? Walk me through a project using it.
+What is the difference between TensorFlow and PyTorch in terms of computation graphs?
+How do you build and train a simple neural network in PyTorch or TensorFlow?
+What is Scikit-learn's Pipeline object and why is it useful?
+How do you save and load a trained model in PyTorch or TensorFlow?
+What are callbacks in TensorFlow/Keras? Give examples of when you'd use them.
+How do you handle overfitting within a deep learning framework (dropout, early stopping, etc.)?
+How do you perform hyperparameter tuning using Scikit-learn?
+What is the difference between model.eval() and model.train() in PyTorch?
+How do you move a model from experimentation (notebook) to a reusable, production-ready script?
+How do you handle GPU vs CPU training in PyTorch or TensorFlow?
+What is transfer learning and how would you implement it using an existing framework?
+4. MLOps & Model Deployment
+What is MLOps and why is it important?
+What is the difference between a data pipeline and an ML pipeline?
+How would you deploy a trained ML model to serve real-time predictions?
+What is model drift? How do you detect and handle it?
+How do you version control ML models and datasets?
+What is a feature store and why would you use one?
+How would you set up automated retraining of a model when performance degrades?
+What tools have you used or know of for MLOps (MLflow, Kubeflow, SageMaker, etc.)?
+How do you log and track ML experiments?
+What is the difference between online and batch inference?
+How do you monitor a deployed ML model in production?
+How would you roll back a bad model deployment?
+5. CI/CD Pipelines
+Describe the CI/CD pipeline you have worked with in your current or previous role.
+What is the difference between Continuous Integration, Continuous Delivery, and Continuous Deployment?
+How does a CI/CD pipeline for ML differ from one for traditional software?
+How do you write automated tests for a data pipeline?
+What branching strategy does your team follow and how do code reviews fit in?
+How do you handle environment-specific configurations (dev, staging, prod) in a pipeline?
+How would you trigger a CI/CD pipeline automatically when new training data arrives?
+What happens when a test fails mid-pipeline? How do you handle rollback?
+Which CI/CD tools have you worked with (GitHub Actions, Jenkins, GitLab CI, etc.)?
+How do you integrate code quality checks (linting, static analysis) into a pipeline?
+How would you set up a CI/CD pipeline to deploy a Dockerized ML model to Kubernetes?
+How do you manage secrets and credentials securely within a CI/CD pipeline?
+6. Docker & Kubernetes
+What is Docker and why is it used in ML deployments?
+Walk me through writing a Dockerfile for a Python ML application.
+What is the difference between a Docker image and a Docker container?
+What is Docker Compose and when would you use it?
+What is Kubernetes and what problem does it solve over plain Docker?
+What are Pods, Deployments, and Services in Kubernetes?
+How do you scale an ML model serving application using Kubernetes?
+How do you manage configuration and secrets in Kubernetes (ConfigMaps, Secrets)?
+What is a Kubernetes namespace and why is it useful?
+How do you do a rolling deployment update in Kubernetes without downtime?
+How do you debug a failing container in Kubernetes?
+What is the difference between horizontal and vertical scaling in Kubernetes?
+7. Cloud Infrastructure (AWS / Azure / GCP)
+Which cloud platform have you worked with and what services did you use for data engineering?
+What is the difference between object storage (S3/Blob) and a data warehouse (Redshift/BigQuery)?
+How do you store and access large ML datasets efficiently in the cloud?
+What cloud-managed ML services are you aware of (SageMaker, Azure ML, Vertex AI)?
+How would you design a cloud pipeline that automatically trains and deploys a model?
+How do you manage access control and permissions for cloud resources (IAM)?
+What is serverless computing and when is it appropriate for ML workloads?
+How do you control cloud costs for compute-heavy ML training jobs?
+How do you handle data transfer and latency between cloud services in a pipeline?
+What is a VPC and why is it relevant for deploying ML services in the cloud?
+How do you set up logging and monitoring for cloud-deployed applications?
+How would you migrate an on-premise data pipeline to the cloud?
+8. Software Engineering Best Practices
+What does production-ready code mean to you?
+How do you approach writing unit tests for data transformation logic?
+What design patterns have you used in your SE experience? Give an example.
+How do you document a complex pipeline or system for teammates?
+Describe a time you had to refactor a significant piece of code. What was your approach?
+How do you balance speed of delivery vs. code quality under tight deadlines?
+What is your approach to code reviews — both giving and receiving feedback?
+How do you manage dependencies and package versions in a Python project?
+What is the SOLID principle? Can you explain any one of them with an example?
+How do you handle logging and error handling in a production application?
+What is the difference between unit, integration, and end-to-end testing?
+How do you ensure reproducibility in your code and experiments?
+9. Big Data Technologies (Hadoop / Spark / Kafka)
+What is the difference between Hadoop and Spark?
+When would you choose Spark over a traditional SQL database for data processing?
+What are Spark RDDs, DataFrames, and Datasets? How do they differ?
+What is lazy evaluation in Spark and why does it matter for performance?
+How does Spark handle fault tolerance?
+What is Kafka and what problem does it solve?
+What is the difference between a Kafka topic, partition, and consumer group?
+How would you use Kafka to stream data into an ML feature pipeline in real time?
+What are common performance bottlenecks in Spark jobs and how do you fix them?
+What is data partitioning in Spark and why is it important?
+What is the role of a schema registry in a Kafka-based pipeline?
+How do you handle late-arriving data in a streaming pipeline?
+10. Monitoring & Logging (ELK / Grafana / Prometheus)
+Why is monitoring important for ML models in production?
+What metrics would you track for a deployed ML model?
+What is the ELK stack and what is each component responsible for?
+How would you set up centralized logging for a microservices-based ML application?
+What is Prometheus and what type of data does it collect?
+How does Grafana connect to Prometheus to display dashboards?
+What is an alert in Prometheus and how do you configure one?
+How do you differentiate between infrastructure monitoring and model performance monitoring?
+What is distributed tracing and how does it help debug production issues?
+How would you detect that a deployed model's predictions have degraded over time using monitoring tools?
+What is log aggregation and why is it needed in a distributed system?
+How do you set up health checks for a model serving API?
