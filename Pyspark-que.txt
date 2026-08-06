@@ -1,0 +1,246 @@
+Question 2
+
+Write a spark job to extract information from banking data, which will mine information from the files
+
+accounts.csv and transactions.csv and perform data manipulation on the same. Sample files are given
+
+in data
+
+accounts.csv
+
+contains the data in the
+
+layout acccountNumber, balance
+
+CSV file with one line per acccountNumber
+
+transactions.csv
+
+contains the data in the
+
+layout fromAccountNumber, toAccountNumber, tran
+
+sferAmount
+
+CSV file with multiple lines
+
+per fromAccountNumber
+
+Accounts-Transactions Relationship: One account
+
+could have multiple transactions. A valid transaction is
+
+the transaction from a valid account number in
+
+accounts.csv
+
+QUESTION DESCRIPTION
+
+Accounts-Transactions Relationship: One account could have multiple transactions. A valid transaction is the transaction from a valid account number in accounts.cSV
+
+The project is partially completed and there are 3 methods and a spark session to be implemented in the class main.job.pipeline.PySparkJob:
+
+init_spark_session
+
+Web IDE
+
+SparkSession:
+
+create a spark session with master local and name Banking Data Mining
+
+extract_valid_transactions(self, accounts:
+
+DataFrame, transactions:
+
+DataFrame)
+
+->
+
+DataFrame:
+
+⚫ transaction is valid if transferAmount is less than or equals to balance and the toAccount Number exists in accountsDf
+
+⚫ returned the filtered transactionDf
+
+⚫distinct_transactions(self, transactions: DataFrame)-> int:
+
+⚫ return the count of total distinct transactions based on fromAccountNumber
+
+transactions_per_account(self, trong
+return the count of total distinct transactions base
+
+on fromAccountNumber
+
+transactions_per_account(self, transactions DataFrame) -> dict:
+
+find the count of transactions per fromAccountNumber
+
+return top 10, fromAccountNumber and corresponding count as a dictionary
+
+Complete the implementation of the spark job such that all unit tests pass successfully. The unit tests can be run to check progress while solving the question.
+
+▼Job in Action
+
+def main():
+
+job PySparkJob()
+
+#Load input data to DataFrame
+
+print("<>")
+
+accounts job.read_csv(sys.argv[
+
+transactions = job.read_csv(sys.a
+
+# Get valid transactions
+
+print("<>")
+
+valid_transactions = job.extract_
+
+valid_transactions.show
+def main():
+
+job PySparkJob()
+
+# Load input data to DataFrame
+
+print("<>")
+
+accounts = job.read_csv(sys.argv[1])
+
+transactions = job.read_csv(sys.argv[2])
+
+#Get valid transactions
+
+print("<>")
+
+I
+
+valid_transactions = job.extract_valid_transactions(accounts, transactions)
+
+valid_transactions.show()
+
+#Get number of distinct transaction
+
+print("<>")
+
+nb_distinct_transaction job.distinct_transactions (transactions)
+
+print(nb_distinct_transaction)
+
+#Get total_transactions by account
+
+print("<>")
+
+transactions_account job.transactions_per_account (transactions)
+
+print(transactions_account)
+
+Job.stop()
+
+
+
+from main.job.pipeline import PySparkJob
+
+def main():
+
+Job PySparkJob()
+
+#Load input data to DataFrame
+
+print("<<Reading>>")
+
+accounts job.read_csv(sys.argv[1])
+
+transactions job.read_csv(sys.argv[2])
+
+#Get valid transactions
+
+print("<<Filter Invalid Accounts>>")
+
+valid_transactions = job.extract_valid_transactions (accounts, transactions)
+
+valid_transactions.show()
+
+I
+
+#Get number of distinct transaction
+
+print("<<Distinct Transactions>>")
+
+nb_distinct_transaction = job.distinct_transactions (transactions)
+
+print(nb_distinct_transaction)
+
+#Get total_transactions by account
+
+print("<<Total Vaccinations By Country>>")
+
+transactions_account = job.transactions_per_account(transactions)
+
+print(transactions_account)
+
+job.stop()
+
+pipeline.pyax
+
+1
+
+from pyspark.aqt saport SparkSession, DataFrame, Window
+
+From main base import PySparkJobInterface
+
+Import pyspark.sql、functions as F
+
+class PySparkJob (PySparkJobInterface):
+
+the
+
+D
+
+def init_spark_session(self) -> SparkSession:
+
+#TODO:
+
+Put your code here
+
+I
+
+def extract_valid_transactions (self, accounts: DataFrame, transactions: DataFrame) -> DataFrame
+
+www
+
+#TODO: Put your code here
+
+15
+
+CS
+
+16
+
+def distinct_transactions(self, transactions: DataFrame) -> int:
+
+ea
+
+17
+
+#TODO: Put your code here
+
+18
+
+0
+
+19
+
+20
+
+def transactions_per_account(self, transactions: DataFrame) -> dict:
+
+21
+
+#TOdo put the code here
+
+
+
