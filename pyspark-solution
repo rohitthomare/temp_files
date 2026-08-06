@@ -1,0 +1,62 @@
+from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql import functions as F
+
+
+class PySparkJob:
+
+    def __init__(self):
+        self.spark = self.init_spark_session()
+
+    def init_spark_session(self) -> SparkSession:
+        return (
+            SparkSession.builder
+            .master("local")
+            .appName("Banking Data Mining")
+            .getOrCreate()
+        )
+
+    def read_csv(self, path: str) -> DataFrame:
+        return self.spark.read.option("header", True).option("inferSchema", True).csv(path)
+
+    def extract_valid_transactions(self, accounts: DataFrame, transactions: DataFrame) -> DataFrame:
+        # Join transactions with accounts on fromAccountNumber to get balance
+        valid = (
+            transactions.join(
+                accounts.select("accountNumber", "balance"),
+                transactions["fromAccountNumber"] == accounts["accountNumber"],
+                how="inner"
+            )
+            .filter(F.col("transferAmount") <= F.col("balance"))
+        )
+
+        # Verify toAccountNumber also exists in accounts
+        account_numbers = accounts.select(F.col("accountNumber").alias("toAcct"))
+        valid = valid.join(
+            account_numbers,
+            valid["toAccountNumber"] == account_numbers["toAcct"],
+            how="inner"
+        )
+
+        return valid.select(
+            transactions["fromAccountNumber"],
+            transactions["toAccountNumber"],
+            transactions["transferAmount"]
+        )
+
+    def distinct_transactions(self, transactions: DataFrame) -> int:
+        return transactions.select("fromAccountNumber").distinct().count()
+
+    def transactions_per_account(self, transactions: DataFrame) -> dict:
+        result = (
+            transactions.groupBy("fromAccountNumber")
+            .agg(F.count("*").alias("transaction_count"))
+            .orderBy(F.col("transaction_count").desc())
+            .limit(10)
+        )
+        return {
+            row["fromAccountNumber"]: row["transaction_count"]
+            for row in result.collect()
+        }
+
+    def stop(self):
+        self.spark.stop()
