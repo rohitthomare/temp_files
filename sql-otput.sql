@@ -1,42 +1,32 @@
--- Step 1: build the pivot column list
-SET @cols = NULL;
+SET SESSION group_concat_max_len = 1000000;
 
-SELECT GROUP_CONCAT(col ORDER BY p DESC, tld ASC SEPARATOR ',\n       ')
-INTO @cols
+SELECT GROUP_CONCAT(
+         CONCAT(",CONCAT('$',SUM(IF(tld='",tld,"',amt,NULL))) `.",tld," (",raw,"/year) x ",n,"`")
+         ORDER BY amt DESC, tld SEPARATOR '')
+INTO @c
 FROM (
-    SELECT d.tld,
-           CAST(REPLACE(pr.price, '$', '') AS DECIMAL(10,2)) AS p,
-           CONCAT(
-             'CONCAT(''$'', FORMAT(SUM(CASE WHEN t.tld = ''', d.tld,
-             ''' THEN t.price END), 2)) AS `.', d.tld,
-             ' ($', FORMAT(CAST(REPLACE(pr.price, '$', '') AS DECIMAL(10,2)), 2),
-             '/year) x ', COUNT(*), '`'
-           ) AS col
-    FROM (
-        SELECT SUBSTRING_INDEX(name, '.', -1) AS tld
-        FROM domains
-        WHERE LEFT(expiration_date, 7) = '2022-08'
-    ) d
-    JOIN prices pr ON pr.tld = d.tld
-    GROUP BY d.tld, p
+  SELECT p.tld tld, p.price raw,
+         CAST(REPLACE(p.price,'$','') AS DECIMAL(10,2)) amt,
+         COUNT(*) n
+  FROM domains d
+  JOIN prices p ON p.tld = SUBSTRING_INDEX(d.name,'.',-1)
+  WHERE d.expiration_date LIKE '2022-08%'
+  GROUP BY p.tld, p.price
 ) x;
 
--- Step 2: assemble and run the pivot
-SET @sql = CONCAT(
-'SELECT a.username,
-       ', IFNULL(@cols, 'NULL'), '
- FROM accounts a
- LEFT JOIN (
-     SELECT dm.account_id,
-            SUBSTRING_INDEX(dm.name, ''.'', -1) AS tld,
-            CAST(REPLACE(pr.price, ''$'', '''') AS DECIMAL(10,2)) AS price
-     FROM domains dm
-     JOIN prices pr ON pr.tld = SUBSTRING_INDEX(dm.name, ''.'', -1)
-     WHERE LEFT(dm.expiration_date, 7) = ''2022-08''
- ) t ON t.account_id = a.id
- GROUP BY a.id, a.username
- ORDER BY a.username');
+SET @s = CONCAT('SELECT a.username', IFNULL(@c,''), '
+FROM accounts a
+LEFT JOIN (
+  SELECT d.account_id aid,
+         p.tld tld,
+         CAST(REPLACE(p.price,''$'','''') AS DECIMAL(10,2)) amt
+  FROM domains d
+  JOIN prices p ON p.tld = SUBSTRING_INDEX(d.name,''.'',-1)
+  WHERE d.expiration_date LIKE ''2022-08%''
+) v ON aid = a.id
+GROUP BY a.id, a.username
+ORDER BY 1');
 
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
+PREPARE q FROM @s;
+EXECUTE q;
+DEALLOCATE PREPARE q;
