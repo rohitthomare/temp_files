@@ -1,0 +1,154 @@
+Question 3
+
+Implement two mixin classes that add functionality to Python classes:
+
+1. DictMixin: Adds a to_dict method that converts a Python class to a dictionary
+
+2. JSONMixin: Adds a to_json method that converts a Python class to JSON
+
+These mixins should:
+
+Only convert object attributes that do not start with '' (underscore)
+
+Raise a TypeError with the message "Object is not JSON serializable" if a class cannot be converted to JSON
+
+Example
+
+class MyClass(DictMixin, JSONMixin):
+
+def
+
+__init__(self, name, data, secret):
+
+self.name = name
+
+self.data = data
+
+self._secret = secret
+
+obj = MyClass("abc", 10, "secret")
+
+⚫ obj.to_dict() should return ('name': 'abc', 'data': 100
+
+⚫ obj.to json() should return ("name": "abc", "data": 10)
+
+Implementation Description
+
+Complete the class DictMixin and JSONMixin in the editor below.
+
+Constraints
+
+1≤ Inamel, Isecret| ≤ 20
+
+⚫ data is either a set or an integel
+
+Implementation Description
+
+Complete the class DictMixin and JSONMixin in the editor below.
+
+Constraints
+
+1≤ Inamel, Isecret| ≤ 20
+
+data is either a set or an integer with values in the range from 1 to 100 (inclusive).
+
+name and secret contain lowercase English letters only.
+
+▼Input Format For Custom Testing
+
+The first line contains a string, name.
+
+The next line contains a string, dataType, denoting the data type of data.
+
+The following lines contain either an integer if dataType is int, or a length of a list and then numbers if dataType is set.
+
+The last line contains a string, secret.
+
+▼Sample Case O
+
+Sample Input For Custom Testing
+
+STDIN
+
+Function
+
+alex
+
+name = 'alex'
+
+set
+
+dataType = 'set'
+
+2
+
+data size 2
+
+12
+
+data = {12, 13)
+
+13
+
+secretkey
+
+secret = 'secretkey'
+
+Sample Output
+
+{'name': 'alex', 'data': (12, 13}}
+
+Object is not JSON serializable
+
+Explanation
+
+In this example, obj.to_dict() should return ('name': 'alex', 'data': (12, 13)), and obj.to_json() sho
+
+TypeError with message "Object is not JSON serializable".
+
+Sample Case 1
+The last line contains a string, secret.
+
+▼ Sample Case O
+
+Sample Input For Custom Testing
+
+STDIN
+
+Function
+
+alex
+
+name = 'alex'
+
+set
+
+2
+
+dataType = 'set'
+
+data size = 2
+
+12
+
+13
+
+data = {12, 13)
+
+secretkey
+
+secret = 'secretkey'
+
+Sample Output
+
+{'name': 'alex', 'data': {12, 13}}
+
+Object is not JSON serializable
+
+Explanation
+
+In this example, obj.to_dict() should return ['name': 'alex', 'data': [12, 13}}, and obj.to_json() should return
+
+TypeError with message "Object is not JSON serializable".
+
+Sample Case 1
